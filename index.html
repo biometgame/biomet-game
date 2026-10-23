@@ -4,13 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Equipos Biomédicos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            text-align: center;
+        }
+
+        h1 {
+            color: #00e676;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        p.subtitle {
+            color: #b0bec5;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .question-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .btn-option {
+            background: #1e88e5;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .btn-option:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+        }
+
+        .btn-option.correct {
+            background: #2e7d32 !important;
+        }
+
+        .btn-option.incorrect {
+            background: #c62828 !important;
+        }
+
+        .btn-action {
+            margin-top: 25px;
+            background: #00e676;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            transition: transform 0.2s;
+        }
+
+        .btn-action:hover {
+            transform: scale(1.05);
+        }
+
+        #result-screen {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Juego de Equipos Biomédicos</h1>
+    <div class="container">
+        <!-- Pantalla de Juego -->
+        <div id="game-screen">
+            <h1>Juego de Equipos Biomédicos 🩺</h1>
+            <p class="subtitle">Demuestra tus conocimientos en tecnología médica</p>
 
-    <p>Bienvenido a nuestro juego educativo.</p>
-    <p>Aprende a reconocer los equipos biomédicos y sus componentes.</p>
+            <div class="stats-bar">
+                <span>Puntaje: <span id="score">0</span></span>
+                <span>Pregunta: <span id="question-number">1</span>/5</span>
+            </div>
 
-</body>
-</html>
+            <div class="question-box" id="question-text">
+                Cargando pregunta...
+            </div>
+
+            <div class="options-grid" id="options-container">
+                <!-- Las opciones se generan con JavaScript -->
+            </div>
+
+            <button id="next-btn" class="btn-action" onclick="nextQuestion()">Siguiente Pregunta</button>
+        </div>
+
+        <!-- Pantalla Final -->
+        <div id="result-screen">
+            <h1>¡Juego Terminado! 🎉</h1>
